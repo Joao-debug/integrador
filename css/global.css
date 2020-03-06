@@ -57,7 +57,8 @@ h1, h2, h3, h4, h5, p {
     display: block;
     font-size: 1rem;
     font-weight: normal;
-    letter-spacing: .1rem;    
+    letter-spacing: .1rem; 
+    font-style: italic;   
 }
 
 /* Menu principal */
@@ -75,7 +76,7 @@ h1, h2, h3, h4, h5, p {
     text-decoration: none;    
 }
 .nav a:hover, .footer a:hover, .active {
-    background: orangered;
+    background: rgb(255, 8, 0);
     color: #fff;
 }
 .nav > a:first-child {
@@ -115,6 +116,7 @@ h1, h2, h3, h4, h5, p {
 
 /* Rodapé */
 .footer {
+    width: 100%;
     background: rgb(218, 18, 11);
     display: flex;
     justify-content: space-between;

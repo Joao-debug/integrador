@@ -3,7 +3,7 @@
 header("Content-type: text/html; charset=utf-8");
 
 // Conexão com MySQL
-$conn = new mysqli('localhost', 'root', '', 'semnome');
+$conn = new mysqli('localhost', 'root', '', 'corleone');
 
 // Testando conexão
 if ($conn->connect_error) die("Falha na conexão com o DB: " . $conn->connect_error);

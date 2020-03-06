@@ -28,12 +28,9 @@ $js = "";
 require ('header.php');
 
 ?>
-<h2> Pizza 4 Queijos</h2>
-<img class="responsiva" src="img/4quei.jfif">
-<h3>Tamanho: Médio e Grande</h3>
-<h2> Pizza Calabresa</h2>
-<img class="responsiva" src="img/cala.jpg">
-<h3>Tamanho: Médio e Grande</h3>
+<div class="index"><h2> Pizzaria Corleone</h2>
+<h4> A mais nova pizzaria perto de você</h4></div>
+<center><img class="responsiva" src="img/banner.png">
 
 <?php
 

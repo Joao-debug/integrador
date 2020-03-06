@@ -4,10 +4,10 @@
 require ('config.php');
 
 // Define o título "desta" página
-$titulo = "Faça Contato";
+$titulo = "";
 
 // Opção ativa no menu principal
-$menu = "contatos";
+$menu = "cadastro";
 
 // Aponta para o CSS "desta" página. Ex.: /css/contatos.css
 // Deixe vazio para não usar CSS adicional nesta página
@@ -22,7 +22,7 @@ $js = "";
 /*********************************************/
 
 // "Declarando" variáveis
-$nome = $email = $telefone = $endereço = $erro = $msgErro = $msgOk = $msgMail = '';
+$nome = $email = $telefone = $endereço = $senha = $erro = $msgErro = $msgOk = $msgMail = '';
 
 // Se o formulário foi enviado
 if ( isset($_POST['enviado']) ) :
@@ -34,10 +34,12 @@ if ( isset($_POST['enviado']) ) :
     $email = sanitiza( filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL) );
 
     // Obtém o nome do form
-    $assunto = sanitiza( filter_input(INPUT_POST, 'telefone', FILTER_SANITIZE_STRING) );
+    $senha = sanitiza( filter_input(INPUT_POST, 'senha', FILTER_SANITIZE_STRING) );
 
     // Obtém o nome do form
-    $mensagem = filter_input(INPUT_POST, 'endereço', FILTER_SANITIZE_STRING);
+    $telefone = filter_input(INPUT_POST, 'telefone', FILTER_SANITIZE_STRING);
+
+    $endereço = filter_input(INPUT_POST, 'endereço', FILTER_SANITIZE_STRING);
     
     // Verificar o preenchimento do nome
     if (strlen($nome) < 2) {
@@ -78,10 +80,10 @@ TEXTO;
         
         // Preparando para salvar os dados
         $sql = <<<SQL
-INSERT INTO contatos
-    (nome, email, telefone, endereço)
+INSERT INTO usuario
+    (id_nome, id_email, id_senha, id_telefone, id_endereço)
 VALUES
-    ('{$nome}', '{$email}', '{$telefone}', '{$endereço}')
+    ('{$nome}', '{$email}','{$senha}', '{$telefone}', '{$endereço}')
 ;
 SQL;
 
@@ -93,6 +95,7 @@ SQL;
 Um novo contato foi enviado para o site "SemNome":
     Nome: {$nome}
     E-mail: {$email}
+    Senha: {$senha}
     Telefone: {$telefone}
     Endereço: {$endereço}
 TEXTO;
@@ -149,10 +152,19 @@ require ('header.php');
                 <label for="nome">Nome:</label>
                 <input type="text" name="nome" id="nome" placeholder="Seu nome completo" value="<?php echo $nome ?>">
             </p>
+            
             <p>
                 <label for="email">E-mail:</label>
                 <input type="text" name="email" id="email" placeholder="nome@provedor.com" value="<?php echo $email ?>">
             </p>
+
+            <p>
+                <label for="senha">Senha:</label>
+                <input type="password" name="senha" id="senha" placeholder="Digite sua senha" value="<?php echo $senha ?>">
+            </p>
+
+
+
             <p>
                 <label for="telefone">Telefone:</label>
                 <input type="text" name="telefone" id="telefone" placeholder="Número de telefone" value="<?php echo $telefone ?>">
@@ -163,7 +175,8 @@ require ('header.php');
             </p>
             <p>
                 <label></label>
-                <button type="submit">Enviar</button>
+                <button type:"submit">Enviar</button>
+                
             </p>
         </form>
 

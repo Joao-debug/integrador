@@ -185,16 +185,29 @@ VALUES
 ;
 
 -- Criando a tabela "noticias
-CREATE TABLE cadastro (
-    id_noticia INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    data_noticia TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    titulo_noticia VARCHAR(255) NOT NULL,
-    resumo_noticia VARCHAR(255) NOT NULL,
-    texto_noticia LONGTEXT,
-    fonte_noticia VARCHAR(255),
-    status_noticia ENUM('ativo', 'inativo') DEFAULT 'ativo',
-    autor_id INT NOT NULL COMMENT 'Chave estrangeira',
-    FOREIGN KEY (autor_id) REFERENCES autores (id_autor)
+CREATE TABLE usuario (
+    id_nome VARCHAR(130) NOT NULL,
+    id_email INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    id_senha VARCHAR(25) NOT NULL,
+    id_telefone VARCHAR(9) NOT NULL,
+    id_endereço VARCHAR(130)
+);
+CREATE TABLE contato (
+    id_nome VARCHAR(130) NOT NULL,
+    id_email INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    id_telefone VARCHAR(9) NOT NULL,
+    id_mensagem TEXT(300) NOT NULL
+
+
+);
+CREATE TABLE trabalhe(
+    id_nome VARCHAR(130) NOT NULL,
+    id_email INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    id_telefone VARCHAR(9) NOT NULL,
+    id_endereço VARCHAR(130),
+    id_cpf INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    id_curriculo TEXT(300)
+
 );
 
 -- Inserindo dados em "autores"

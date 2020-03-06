@@ -31,6 +31,7 @@
     margin-bottom: .3rem;
 }
 .col1 input, .col1 textarea, .col1 button {
+    text-align: center;
     font-size: inherit;
     font-family: inherit;
     border: 1px solid rgb(252, 15, 15);
@@ -38,7 +39,7 @@
     border-radius: .5rem;
 }
 .col1 input, .col1 textarea {
-    width: 50%;
+    width: 75%;
 }
 .col1 textarea {
     height: 6rem;
@@ -46,7 +47,7 @@
     overflow: auto;
 }
 .col1 button {
-    background: linear-gradient(rgb(142, 181, 212), rgb(28, 78, 119));
+    background: linear-gradient(rgb(142, 181, 212), rgb(238, 41, 6));
     color: white;
     padding-right: 1rem;
     padding-left: 1rem;
@@ -80,6 +81,7 @@
     .col1 {
         flex-grow: 1;
         padding-right: 1rem;
+        text-align: center;
     }
     .col2 {
         width: 200px;

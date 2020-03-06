@@ -26,11 +26,13 @@
 
 .col1 form, .col1 label {
     display: block;
+    text-align: center;
 }
 .col1 label {
     margin-bottom: .3rem;
 }
 .col1 input, .col1 textarea, .col1 button {
+    text-align: center;
     font-size: inherit;
     font-family: inherit;
     border: 1px solid rgb(228, 19, 19);
@@ -38,7 +40,7 @@
     border-radius: .5rem;
 }
 .col1 input, .col1 textarea {
-    width: 25%;
+    width: 50%;
 }
 .col1 textarea {
     height: 6rem;
@@ -46,7 +48,7 @@
     overflow: auto;
 }
 .col1 button {
-    background: linear-gradient(rgb(142, 181, 212), rgb(28, 78, 119));
+    background: linear-gradient(rgb(142, 181, 212), rgb(223, 23, 23));
     color: white;
     padding-right: 1rem;
     padding-left: 1rem;
@@ -88,4 +90,7 @@
         margin: 0;
         border-left: 3px dotted rgb(218, 18, 11);
     }
+}
+.col1{
+    text-align: center;
 }

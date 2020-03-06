@@ -4,10 +4,10 @@
 require ('config.php');
 
 // Define o título "desta" página
-$titulo = "Faça Contato";
+$titulo = "";
 
 // Opção ativa no menu principal
-$menu = "contatos";
+$menu = "pedido";
 
 // Aponta para o CSS "desta" página. Ex.: /css/contatos.css
 // Deixe vazio para não usar CSS adicional nesta página
@@ -34,10 +34,14 @@ if ( isset($_POST['enviado']) ) :
     $email = sanitiza( filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL) );
 
     // Obtém o nome do form
-    $assunto = sanitiza( filter_input(INPUT_POST, 'telefone', FILTER_SANITIZE_STRING) );
+    $telefone = sanitiza( filter_input(INPUT_POST, 'telefone', FILTER_SANITIZE_STRING) );
 
     // Obtém o nome do form
-    $mensagem = filter_input(INPUT_POST, 'endereço', FILTER_SANITIZE_STRING);
+    $endereço = filter_input(INPUT_POST, 'endereço', FILTER_SANITIZE_STRING);
+
+    $cpf = filter_input(INPUT_POST, 'cpf', FILTER_SANITIZE_STRING);
+
+    $curriculo = filter_input(INPUT_POST, 'curriculo', FILTER_SANITIZE_STRING);
     
     // Verificar o preenchimento do nome
     if (strlen($nome) < 2) {
@@ -84,8 +88,8 @@ TEXTO;
         
         // Preparando para salvar os dados
         $sql = <<<SQL
-INSERT INTO contatos
-    (nome, email, telefone, endereço)
+INSERT INTO trabalhe
+    (id_nome, id_email, id_telefone, id_endereço, id_cpf, id_curriculo)
 VALUES
     ('{$nome}', '{$email}', '{$telefone}', '{$endereço}', '{$cpf}', '{$curriculo}')
 ;
@@ -141,46 +145,39 @@ require ('header.php');
 <div class="row">
     <div class="col1">
 
-        <h2>Mande suas Informações</h2>
+        
 
         <?php
         if ($msgOk == ''):
         ?>
 
-        <p>Preencha o formulário abaixo para enviar curriculo de trabalho.</p>
+        
 
         <?php echo $msgErro ?>
 
-        <form name="contatos" id="contatos" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" accept-charset="utf-8">
-            <input type="hidden" name="enviado" value="ok">
-            <p>
-                <label for="nome">Nome:</label>
-                <input type="text" name="nome" id="nome" placeholder="Seu nome completo" value="<?php echo $nome ?>">
-            </p>
-            <p>
-                <label for="email">E-mail:</label>
-                <input type="text" name="email" id="email" placeholder="nome@provedor.com" value="<?php echo $email ?>">
-            </p>
-            <p>
-                <label for="telefone">Telefone:</label>
-                <input type="text" name="telefone" id="telefone" placeholder="Número de telefone" value="<?php echo $telefone ?>">
-            </p>
-            <p>
+        <h1>Escolha seu sabor</h1>
+
+<p></p>
+
+<label for="cars">Lista de sabores</label>
+
+<center><select id="cars">
+  <option value="pepperoni">Pepperoni</option>
+  <option value="portuguesa">Portuguesa</option>
+  <option value="4queijos">4 Queijos</option>
+  <option value="calabresa">Calabresa</option>
+  <option value="frango">Frango com Catupiry</option>
+  <p>
                 <label for="endereço">Endereço:</label>
                 <input type="text" name="endereço" id="endereço" placeholder="Seu endereço" value="<?php echo $endereço ?>">
             </p>
-            <p>
-                <label for="cpf">Cpf</label>
-                <input type="text" name="cpf" placeholder="Digite seu CPF" value="<?php echo $cpf?>">
-            </p>
-            <p>
-                <label for="curriculo">Curriculo</label>
-                <textarea name="curriculo" placeholder="Coloque seu Curriculo"><?php echo $curriculo ?></textarea>    
-            <p>
-                <label></label>
-                <button type="submit">Enviar</button>
-            </p>
-        </form>
+  <label></label>
+  <button type="submit">Pedir</button>
+</select></div>
+
+</body>
+</html>
+
 
         <?php
         else:

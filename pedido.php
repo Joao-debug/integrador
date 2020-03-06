@@ -11,7 +11,7 @@ $menu = "contatos";
 
 // Aponta para o CSS "desta" página. Ex.: /css/contatos.css
 // Deixe vazio para não usar CSS adicional nesta página
-$css = "/css/contatos.css";
+$css = "/css/pedidos.css";
 
 // Aponta para o JavaScript "desta" página. Ex.: /js/contatos.js
 // Deixe vazio para não usar JavaScript adicional nesta página
@@ -22,7 +22,7 @@ $js = "";
 /*********************************************/
 
 // "Declarando" variáveis
-$nome = $email = $telefone = $endereço = $erro = $msgErro = $msgOk = $msgMail = $mensagem = '';
+$nome = $email = $telefone = $endereço = $senha = $erro = $msgErro = $msgOk = $msgMail = '';
 
 // Se o formulário foi enviado
 if ( isset($_POST['enviado']) ) :
@@ -34,10 +34,12 @@ if ( isset($_POST['enviado']) ) :
     $email = sanitiza( filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL) );
 
     // Obtém o nome do form
-    $telefone = sanitiza( filter_input(INPUT_POST, 'telefone', FILTER_SANITIZE_STRING) );
+    $senha = sanitiza( filter_input(INPUT_POST, 'senha', FILTER_SANITIZE_STRING) );
 
     // Obtém o nome do form
-    $mensagem = filter_input(INPUT_POST, 'mensagem', FILTER_SANITIZE_STRING);
+    $telefone = filter_input(INPUT_POST, 'telefone', FILTER_SANITIZE_STRING);
+
+    $endereço = filter_input(INPUT_POST, 'endereço', FILTER_SANITIZE_STRING);
     
     // Verificar o preenchimento do nome
     if (strlen($nome) < 2) {
@@ -56,7 +58,7 @@ if ( isset($_POST['enviado']) ) :
     }
     
     // Verificar o preenchimento da mensagem
-    if (strlen($mensagem) < 4) {
+    if (strlen($endereço) < 4) {
         $erro .= "<li>O endereço está muito curto.</li>";
     }
 
@@ -78,10 +80,10 @@ TEXTO;
         
         // Preparando para salvar os dados
         $sql = <<<SQL
-INSERT INTO contato 
-    (id_nome, id_email, id_telefone, id_mensagem)
+INSERT INTO usuario
+    (id_nome, id_email, id_senha, id_telefone, id_endereço)
 VALUES
-    ('{$nome}', '{$email}', '{$telefone}', '{$mensagem}')
+    ('{$nome}', '{$email}','{$senha}', '{$telefone}', '{$endereço}',)
 ;
 SQL;
 
@@ -93,8 +95,9 @@ SQL;
 Um novo contato foi enviado para o site "SemNome":
     Nome: {$nome}
     E-mail: {$email}
+    Senha: {$senha}
     Telefone: {$telefone}
-    Endereço: {$mensagem}
+    Endereço: {$endereço}
 TEXTO;
 
         // Enviando e-mail --> Não funciona no XAMPP
@@ -133,13 +136,13 @@ require ('header.php');
 <div class="row">
     <div class="col1">
 
-        <h2>Faça Contato</h2>
+        <h2>Cadastre-se para efetuar seu pedido</h2>
 
         <?php
         if ($msgOk == ''):
         ?>
 
-        <p>Preencha o formulário abaixo para entrar em contato com a equipe do site.</p>
+        <p></p>
 
         <?php echo $msgErro ?>
 
@@ -149,17 +152,26 @@ require ('header.php');
                 <label for="nome">Nome:</label>
                 <input type="text" name="nome" id="nome" placeholder="Seu nome completo" value="<?php echo $nome ?>">
             </p>
+            
             <p>
                 <label for="email">E-mail:</label>
                 <input type="text" name="email" id="email" placeholder="nome@provedor.com" value="<?php echo $email ?>">
             </p>
+
+            <p>
+                <label for="senha">Senha:</label>
+                <input type="text" name="senha" id="senha" placeholder="Digite sua senha" value="<?php echo $senha ?>">
+            </p>
+
+
+
             <p>
                 <label for="telefone">Telefone:</label>
                 <input type="text" name="telefone" id="telefone" placeholder="Número de telefone" value="<?php echo $telefone ?>">
             </p>
             <p>
-                <label for="endereço">Mensagem:</label>
-                <input type="text" name="mensagem" id="mensagem" placeholder="Digite seu texto" value="<?php echo $mensagem ?>">
+                <label for="endereço">Endereço:</label>
+                <input type="text" name="endereço" id="endereço" placeholder="Seu endereço" value="<?php echo $endereço ?>">
             </p>
             <p>
                 <label></label>
@@ -174,22 +186,7 @@ require ('header.php');
         ?>
 
     </div>
-    <div class="col2">
 
-        <h3>Mais contatos</h3>
-        <img src="/img/contato.png" alt="Mais contatos">
-        <p>Você também pode falar conosco pelas redes sociais:</p>
-
-        <ul>
-            <li><a href="http://facebook.com/" target="_blank"><i class="fab fa-fw fa-facebook-square"></i> Facebook</a></li>
-            <li><a href="http://youtube.com/" target="_blank"><i class="fab fa-fw fa-youtube-square"></i> Youtube</a></li>
-            <li><a href="http://linkedin.com/" target="_blank"><i class="fab fa-fw fa-linkedin"></i> Linkedin</a></li>
-            <li><a href="http://twitter.com/" target="_blank"><i class="fab fa-fw fa-twitter-square"></i> Twitter</a></li>
-            <li><a href="http://instagram.com/" target="_blank"><i class="fab fa-fw fa-instagram"></i> Instagram</a></li>
-        </ul>
-
-    </div>
-</div>
 
 
 
